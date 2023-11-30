@@ -1,5 +1,9 @@
+import styles from './Header.module.css'
+
 export function Header() {
   return (
-    <strong className="header">Social Feed</strong>
+    <header className={styles.header}>
+      <strong>Social Feed</strong>
+    </header>
   )
 }
