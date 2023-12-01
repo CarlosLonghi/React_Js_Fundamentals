@@ -1,4 +1,65 @@
 .post {
-  background: #ccc;
-  padding: 10px;
+  background: var(--gray-800);
+  border-radius: 8px;
+  padding: 2.5rem;
+}
+/* Aplica a margin apenas para posts que tenha um post anterior a ele */
+.post + .post {
+  margin-top: 2rem;
+}
+
+.content {
+  margin-top: 1.5rem;
+}
+.content p {
+  line-height: 1.6rem;
+  color: var(--gray-200);
+  white-space: pre-wrap;
+}
+.content a {
+  font-weight: 700;
+  color: var(--green-300);
+  text-decoration: none;
+}
+.content a:hover {
+  color: var(--green-300);
+}
+
+.post > header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.post > header time {
+  font-size: 0.875rem;
+  color: var(--gray-400);
+}
+
+.author {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.author img {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 8px;
+  box-sizing: initial;
+
+  border: 3px solid var(--gray-800);
+  outline: 2px solid var(--green-300);
+}
+
+.authorInfo {
+  display: flex;
+  flex-direction: column;
+}
+.authorInfo strong {
+  color: var(--gray-100);
+  line-height: 1.6rem;
+}
+.authorInfo span {
+  font-size: 0.875rem;
+  line-height: 1.6rem;
+  color: var(--gray-400);
 }

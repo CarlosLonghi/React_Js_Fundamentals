@@ -6,6 +6,13 @@ import styles from "./App.module.css"
 import "./global.css"
 
 export function App() {
+  const userText = `Fala galeraa 👋 
+
+Acabei de subir mais um projeto no meu portifólio. É um projeto que fiz no Ignite. 🚀
+  
+  👉 https://github.com/CarlosLonghi/Node_Fundamentals
+  
+  #novoprojeto #nlw #rocketseat`
 
   return (
     <>
@@ -16,12 +23,8 @@ export function App() {
         <main>
           <Post 
             author="Carlos Longhi" 
-            content="Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque omnis ut error."  
-          />
-
-          <Post
-            author="Luiz"
-            content="Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ipsum, vero."
+            position="Developer" 
+            content={userText}
           />
         </main>
       </div>

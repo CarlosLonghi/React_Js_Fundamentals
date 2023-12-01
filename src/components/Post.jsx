@@ -1,11 +1,35 @@
 import styles from './Post.module.css'
 
 export function Post(props) {
+  // Percorre o conteúdo content e adiciona Links nas # e https
+  const replaceHashtagsWithLinks = (content) => {
+    const hashtagRegex = /#(\w+)/g;
+    const urlRegex = /(https?:\/\/\S+)/g;
+    
+    const replacedContent = content.replace(hashtagRegex, '<a href="">#$1</a>');
+    return replacedContent.replace(urlRegex, '<a href="$1" target="_blank">$1</a>');
+  }
   
   return (
-    <div className={styles.post}>
-      <strong>{props.author}</strong> 
-      <p>{props.content}</p>
-    </div>
+    <article className={styles.post}>
+      <header>
+        <div className={styles.author}>
+          <img 
+            className={styles.avatar}
+            src="https://github.com/CarlosLonghi.png"
+          />
+          <div className={styles.authorInfo}>
+            <strong>{props.author}</strong> 
+            <span>{props.position}</span> 
+          </div>
+        </div>
+
+        <time title='1 de Dezembro às 17:00h' dateTime='2023-12-01 17:00:00'>Publicado á 1h</time>
+      </header>
+
+      <div className={styles.content}>
+        <p dangerouslySetInnerHTML={{ __html: replaceHashtagsWithLinks(props.content) }}></p>
+      </div>
+    </article>
   )
 }
