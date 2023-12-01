@@ -16,4 +16,5 @@
 .brand strong {
   color: var(--gray-100);
   font-size: 1.5rem;
+  white-space: nowrap;
 }
