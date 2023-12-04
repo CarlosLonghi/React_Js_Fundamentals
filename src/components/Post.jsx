@@ -6,7 +6,7 @@ export function Post(props) {
     const hashtagRegex = /#(\w+)/g;
     const urlRegex = /(https?:\/\/\S+)/g;
     
-    const replacedContent = content.replace(hashtagRegex, '<a href="">#$1</a>');
+    const replacedContent = content.replace(hashtagRegex, '<a href="#">#$1</a>');
     return replacedContent.replace(urlRegex, '<a href="$1" target="_blank">$1</a>');
   }
   
@@ -30,6 +30,18 @@ export function Post(props) {
       <div className={styles.content}>
         <p dangerouslySetInnerHTML={{ __html: replaceHashtagsWithLinks(props.content) }}></p>
       </div>
+
+      <form className={styles.commentForm}>
+        <strong>Deixe seu feedback</strong>
+
+        <textarea 
+          placeholder='Escreva um comentário...'
+        />
+
+        <footer>
+          <button  type='submit'>Comentar</button>
+        </footer>
+      </form>
     </article>
   )
 }
