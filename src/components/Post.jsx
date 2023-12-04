@@ -1,5 +1,7 @@
 import styles from './Post.module.css'
 
+import { Comment } from './Comment';
+
 export function Post(props) {
   // Percorre o conteúdo content e adiciona Links nas # e https
   const replaceHashtagsWithLinks = (content) => {
@@ -42,6 +44,12 @@ export function Post(props) {
           <button  type='submit'>Comentar</button>
         </footer>
       </form>
+
+      <div className={styles.commentList}>
+        <Comment/>
+        <Comment/>
+        <Comment/>
+      </div>
     </article>
   )
 }
