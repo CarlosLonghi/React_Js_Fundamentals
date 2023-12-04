@@ -56,7 +56,8 @@
   line-height: 0;
   transition: color 0.2s;
 }
-.commentContent header > button:hover {
+.commentContent header > button:hover,
+.commentContent header > button:focus {
   color: var(--red-500);
 }
 
@@ -81,10 +82,16 @@
   gap: 0.5rem;
   align-items: center;
 }
-.commentBox footer > button:hover {
+.commentBox footer > button:hover, 
+.commentBox footer > button:focus {
   color: var(--green-300);
 }
 .commentBox footer > button span::before {
   content: '\2022';
   padding: 0 0.5rem 0 0;
+}
+
+.commentBox footer > button, 
+.commentContent header > button {
+  outline: none;
 }

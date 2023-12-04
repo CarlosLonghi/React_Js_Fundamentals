@@ -15,15 +15,6 @@
   align-items: center;
   margin-top: calc(0px - 2rem - 5px);
 }
-.avatar {
-  width: 4rem;
-  height: 4rem;
-  border-radius: 8px;
-  box-sizing: initial; /* Faz com que o elemento ocupe seu tamanho inicial, e NÂO comprima ao adicionar border, outiline, etc. */
-
-  border: 3px solid var(--gray-800);
-  outline: 2px solid var(--green-300);
-}
 .profile strong {
   margin-top: 1rem;
   color: var(--gray-100);
