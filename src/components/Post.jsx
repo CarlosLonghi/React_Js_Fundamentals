@@ -5,12 +5,19 @@ import { Avatar } from './Avatar';
 
 export function Post(props) {
   // Percorre o conteúdo content e adiciona Links nas # e https
-  const replaceHashtagsWithLinks = (content) => {
+  const replaceHashtagsUrlsWithLinks = (content) => {
     const hashtagRegex = /#(\w+)/g;
     const urlRegex = /(https?:\/\/\S+)/g;
     
     const replacedContent = content.replace(hashtagRegex, '<a href="#">#$1</a>');
-    return replacedContent.replace(urlRegex, '<a href="$1" target="_blank">$1</a>');
+
+    const compactedContent = replacedContent.replace(urlRegex, (match, url) => {
+      const urlObj = new URL(url);
+      const projectName = urlObj.pathname.slice(1);
+      return `<a href="${url}" target="_blank">${projectName}</a>`;
+    });
+  
+    return compactedContent;
   }
   
   return (
@@ -30,7 +37,7 @@ export function Post(props) {
       </header>
 
       <div className={styles.content}>
-        <p dangerouslySetInnerHTML={{ __html: replaceHashtagsWithLinks(props.content) }}></p>
+        <p dangerouslySetInnerHTML={{ __html: replaceHashtagsUrlsWithLinks(props.content) }}></p>
       </div>
 
       <form className={styles.commentForm}>
@@ -46,7 +53,6 @@ export function Post(props) {
       </form>
 
       <div className={styles.commentList}>
-        <Comment/>
         <Comment/>
         <Comment/>
       </div>
