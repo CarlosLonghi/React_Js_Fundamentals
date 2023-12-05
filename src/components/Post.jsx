@@ -1,39 +1,41 @@
-import styles from './Post.module.css'
+import styles from './Post.module.css';
 
 import { Comment } from './Comment';
 import { Avatar } from './Avatar';
 
-export function Post(props) {
-  // Percorre o conteúdo content e adiciona Links nas # e https
-  const replaceHashtagsUrlsWithLinks = (content) => {
-    const hashtagRegex = /#(\w+)/g;
-    const urlRegex = /(https?:\/\/\S+)/g;
-    
-    const replacedContent = content.replace(hashtagRegex, '<a href="#">#$1</a>');
+// Percorre o conteúdo content e adiciona Links nas # e https
+const replaceHashtagsUrlsWithLinks = (content) => {
+  const hashtagOrUrlRegex = /#(\w+)|(https?:\/\/\S+)/g;
+  
+  const replacedContent = content.replace(hashtagOrUrlRegex, (match, hashtag, url) => {
+    switch (true) {
+      case !!hashtag:
+        return `<a href="#">#${hashtag}</a>`;
+      case !!url:
+        return `<a href="${url}" target="_blank">${url}</a>`;
+      default:
+        return match;
+    }
+  });
 
-    const compactedContent = replacedContent.replace(urlRegex, (match, url) => {
-      const urlObj = new URL(url);
-      const projectName = urlObj.pathname.slice(1);
-      return `<a href="${url}" target="_blank">${projectName}</a>`;
-    });
-  
-    return compactedContent;
-  }
-  
+  return replacedContent;
+}
+
+export function Post(props) {
   return (
     <article className={styles.post}>
       <header>
         <div className={styles.author}>
           <Avatar
-            src="https://github.com/CarlosLonghi.png"
+            src={props.author.avatarUrl}
           />
           <div className={styles.authorInfo}>
-            <strong>{props.author}</strong> 
-            <span>{props.position}</span> 
+            <strong>{props.author.name}</strong> 
+            <span>{props.author.role}</span> 
           </div>
         </div>
 
-        <time title='1 de Dezembro às 17:00h' dateTime='2023-12-01 17:00:00'>Publicado á 1h</time>
+        <time title='1 de Dezembro às 17:00h' dateTime={props.publishedAt}>Publicado á 1h</time>
       </header>
 
       <div className={styles.content}>

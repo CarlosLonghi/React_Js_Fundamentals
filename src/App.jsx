@@ -5,15 +5,41 @@ import { Sidebar } from "./components/Sidebar"
 import styles from "./App.module.css"
 import "./global.css"
 
+// author: { avatar_url: "", name: "", role: ""}
+// publishedAt: Date
+// content: String
+const posts = [
+  {
+    id: 1,
+    author: {
+      avatarUrl: 'https://github.com/CarlosLonghi.png',
+      name: 'Carlos Longhi',
+      role: 'Web Developer',
+    },
+    content: `Fala galeraa 👋 
+
+    Acabei de subir mais um projeto no meu portifólio. É um projeto que fiz no Ignite. 🚀
+        
+    🚀 https://github.com/CarlosLonghi/Node_Fundamentals
+
+    #novoprojeto #nlw #rocketseat`,
+    publishedAt: new Date('2023-12-04 20:00:00')
+  },
+  {
+    id: 2,
+    author: {
+      avatarUrl: 'https://github.com/gabrielfanti.png',
+      name: 'Gabriel Fanti',
+      role: 'QA'
+    },
+    content: `Fala galeraa 👋 
+    https://www.youtube.com/watch?v=QdBZY2fkU-0
+      
+    #qa #dev`,
+    publishedAt: new Date('2023-12-03 22:00:00')
+  },
+]
 export function App() {
-  const userText = `Fala galeraa 👋 
-
-Acabei de subir mais um projeto no meu portifólio. É um projeto que fiz no Ignite. 🚀
-  
-  👉 https://github.com/CarlosLonghi/Node_Fundamentals
-  
-  #novoprojeto #nlw #rocketseat`
-
   return (
     <>
       <Header/>
@@ -21,11 +47,15 @@ Acabei de subir mais um projeto no meu portifólio. É um projeto que fiz no Ign
       <div className={styles.wrapper}>
         <Sidebar/>
         <main>
-          <Post 
-            author="Carlos Longhi" 
-            position="Developer" 
-            content={userText}
-          />
+          {posts.map(post => {
+            return (
+            <Post
+              key={post.id}
+              author={post.author}
+              content={post.content}
+              publishedAt={post.publishedAt}
+            />)
+          })}
         </main>
       </div>
     </>

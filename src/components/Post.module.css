@@ -14,12 +14,13 @@
 .content p {
   line-height: 1.6rem;
   color: var(--gray-200);
-  white-space: pre-wrap;
+  white-space: pre-line;
 }
 .content a {
   font-weight: 700;
   color: var(--green-300);
   text-decoration: none;
+  word-break: break-all;
 }
 .content a:hover {
   color: var(--green-300);
