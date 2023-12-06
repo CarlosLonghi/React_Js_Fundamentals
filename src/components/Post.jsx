@@ -1,10 +1,10 @@
-import { format, formatDistanceToNow } from 'date-fns';
-import ptBR from 'date-fns/locale/pt-BR';
-import { useState } from 'react';
-import styles from './Post.module.css';
+import { format, formatDistanceToNow } from 'date-fns'
+import ptBR from 'date-fns/locale/pt-BR'
+import { useState } from 'react'
+import styles from './Post.module.css'
 
-import { Comment } from './Comment';
-import { Avatar } from './Avatar';
+import { Comment } from './Comment'
+import { Avatar } from './Avatar'
 
 // Percorre o conteúdo content e adiciona Links nas # e https
 const replaceHashtagsUrlsWithLinks = (content) => {
@@ -13,9 +13,9 @@ const replaceHashtagsUrlsWithLinks = (content) => {
   const replacedContent = content.replace(hashtagOrUrlRegex, (match, hashtag, url) => {
     switch (true) {
       case !!hashtag:
-        return `<a href="#">#${hashtag}</a>`;
+        return `<a href="#">#${hashtag}</a>`
       case !!url:
-        return `<a href="${url}" target="_blank">${url}</a>`;
+        return `<a href="${url}" target="_blank">${url}</a>`
       default:
         return match;
     }
