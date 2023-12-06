@@ -1,3 +1,5 @@
+import { format, formatDistanceToNow } from 'date-fns';
+import ptBR from 'date-fns/locale/pt-BR';
 import styles from './Post.module.css';
 
 import { Comment } from './Comment';
@@ -21,25 +23,45 @@ const replaceHashtagsUrlsWithLinks = (content) => {
   return replacedContent;
 }
 
-export function Post(props) {
+export function Post({ author, content, publishedAt }) {
+  // - Formatando Datas usando "Intl.DateTimeFormat" do JS
+  // const publishedDateFormatted = new Intl.DateTimeFormat('pt-BR', {
+  //   day: '2-digit',
+  //   month: 'long',
+  //   hour: '2-digit',
+  //   minute: '2-digit'
+  // }).format(publishedAt)
+
+  // - Formatando Datas usando a lib "Date-fns"
+  const publishedDateFormatted = format(publishedAt, "d 'de' LLLL 'às' H:mm'h'", {
+    locale: ptBR
+  }) 
+
+  const publishedDateRelativeToNow = formatDistanceToNow(publishedAt, {
+    locale: ptBR,
+    addSuffix: true
+  })
+
   return (
     <article className={styles.post}>
       <header>
         <div className={styles.author}>
           <Avatar
-            src={props.author.avatarUrl}
+            src={author.avatarUrl}
           />
           <div className={styles.authorInfo}>
-            <strong>{props.author.name}</strong> 
-            <span>{props.author.role}</span> 
+            <strong>{author.name}</strong> 
+            <span>{author.role}</span> 
           </div>
         </div>
 
-        <time title='1 de Dezembro às 17:00h' dateTime={props.publishedAt}>Publicado á 1h</time>
+        <time title={publishedDateFormatted} dateTime={publishedAt.toISOString()}>
+          {publishedDateRelativeToNow}
+        </time>
       </header>
 
       <div className={styles.content}>
-        <p dangerouslySetInnerHTML={{ __html: replaceHashtagsUrlsWithLinks(props.content) }}></p>
+        <p dangerouslySetInnerHTML={{ __html: replaceHashtagsUrlsWithLinks(content) }}></p>
       </div>
 
       <form className={styles.commentForm}>

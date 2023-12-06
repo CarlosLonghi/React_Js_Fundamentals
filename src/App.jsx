@@ -5,9 +5,7 @@ import { Sidebar } from "./components/Sidebar"
 import styles from "./App.module.css"
 import "./global.css"
 
-// author: { avatar_url: "", name: "", role: ""}
-// publishedAt: Date
-// content: String
+// Post data
 const posts = [
   {
     id: 1,
@@ -36,7 +34,7 @@ const posts = [
     https://www.youtube.com/watch?v=QdBZY2fkU-0
       
     #qa #dev`,
-    publishedAt: new Date('2023-12-03 22:00:00')
+    publishedAt: new Date('2023-12-06 8:05:00')
   },
 ]
 export function App() {
