@@ -41,12 +41,23 @@ export function Post({ author, content, publishedAt }) {
   function handleCreateNewComment() {
     event.preventDefault()
 
-    setComments([...comments, newCommentText])
-    setNewCommentText('')
+    if (newCommentText) {
+      setComments([...comments, newCommentText])
+      setNewCommentText('')
+    }
   }
 
   function handleNewCommentChange() {
     setNewCommentText(event.target.value)
+  }
+
+  function deleteComment(commentToDelete) {
+    // Imutabilidade -> as variáveis não sofrem mutação, nós criamos um novo espaço em memória.
+    const commentsWithoutDeletedOne = comments.filter(comment => {
+      return comment !== commentToDelete
+    })
+
+    setComments(commentsWithoutDeletedOne)
   }
 
   return (
@@ -88,7 +99,13 @@ export function Post({ author, content, publishedAt }) {
 
       <div className={styles.commentList}>
         {comments.map(comment => {
-          return <Comment content={comment} />
+          return (
+            <Comment
+              key={comment} 
+              content={comment} 
+              onDeleteComment={deleteComment}
+            />
+          )
         })}
       </div>
     </article>
