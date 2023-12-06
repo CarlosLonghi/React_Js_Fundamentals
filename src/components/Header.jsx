@@ -7,7 +7,7 @@ export function Header() {
     <header className={styles.header}>
       <div className={styles.brand}>
         <img src={igniteLogo} alt="Logo"/>
-        <strong>Social Feed Teste</strong>
+        <strong>Social Feed</strong>
       </div>
     </header>
   )

@@ -27,7 +27,8 @@ const replaceHashtagsUrlsWithLinks = (content) => {
 export function Post({ author, content, publishedAt }) {
   const [comments, setComments] = useState(['Post teste'])
   const [newCommentText, setNewCommentText] = useState('')
-
+  
+  const isNewCommentEmpty = newCommentText.length === 0
 
   const publishedDateFormatted = format(publishedAt, "d 'de' LLLL 'às' H:mm'h'", {
     locale: ptBR
@@ -48,6 +49,7 @@ export function Post({ author, content, publishedAt }) {
   }
 
   function handleNewCommentChange() {
+    event.target.setCustomValidity('')
     setNewCommentText(event.target.value)
   }
 
@@ -58,6 +60,10 @@ export function Post({ author, content, publishedAt }) {
     })
 
     setComments(commentsWithoutDeletedOne)
+  }
+
+  function handleNewCommentInvalid() {
+    event.target.setCustomValidity('Escreva um comentário!')
   }
 
   return (
@@ -90,10 +96,12 @@ export function Post({ author, content, publishedAt }) {
           value={newCommentText}
           placeholder='Escreva um comentário...'
           onChange={handleNewCommentChange}
+          onInvalid={handleNewCommentInvalid}
+          required
         />
 
         <footer>
-          <button type='submit'>Comentar</button>
+          <button type='submit' disabled={isNewCommentEmpty}>Comentar</button>
         </footer>
       </form>
 
