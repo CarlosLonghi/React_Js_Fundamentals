@@ -4,7 +4,7 @@ import styles from './Comment.module.css'
 import { Trash, ThumbsUp } from '@phosphor-icons/react'
 
 
-export function Comment() {
+export function Comment({ content }) {
   return(
     <div className={styles.comment}>
       <Avatar
@@ -23,7 +23,7 @@ export function Comment() {
             </button>
           </header>
           <p>
-            Lorem ipsum dolor ipsum.
+            {content}
           </p>
         </div>
 
