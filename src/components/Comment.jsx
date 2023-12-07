@@ -13,9 +13,12 @@ export function Comment({ content, onDeleteComment }) {
   }
 
   function handleLikeComment() {
-    setLikeCount(likeCount + 1);
+    // Usar essa estrutura de função SEMPRE que: for atualizar uma informação, e essa informação depender do seu valor armazenado anteriormente.
+    setLikeCount((state) => {
+      return state + 1
+    })
   }
-  
+
   return(
     <div className={styles.comment}>
       <Avatar
